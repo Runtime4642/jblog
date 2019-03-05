@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="category">
+	
+	
+	<insert id="defaultInsert" parameterType="int">
+	<![CDATA[
+			insert into category values(null,'미분류','미분류',current_timestamp(),#{userNo})
+			]]>
+	</insert>
+	
+	<insert id="insert" parameterType="categoryvo">
+	<![CDATA[
+			insert into category values(null,#{name},#{description},current_timestamp(),#{userNo})
+			]]>
+	</insert>
+	
+	<select id="selectCategoryCountByUserNo" parameterType="int" resultType="categorycountdto">
+	<![CDATA[
+	select count(b.CATEGORY_NO) as count ,a.name as name,a.description as description,a.no as no from category a left outer join post b on b.category_no=a.no
+where a.user_no=#{userNo}
+group by a.no
+			]]>
+	</select>
+	
+	<delete id="deleteByNo" parameterType="int">
+		<![CDATA[
+		delete from category where no= #{no}
+		]]>
+	</delete>
+	
+	<select id="getListByUserNo" parameterType="int" resultType="categoryvo">
+	<![CDATA[
+		select no,name,description,reg_date as regDate,user_no as userNo from category where user_no = #{userNo}
+		]]>
+	</select>
+	
+	<select id="getCategoryNoByName" parameterType="String" resultType="int">
+	<![CDATA[
+		select no from category where name=#{name}
+		]]>
+	</select>
+</mapper>
