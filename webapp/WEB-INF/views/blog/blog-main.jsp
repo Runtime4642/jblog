@@ -41,8 +41,8 @@
 					<div class="comment-header"><p>댓글창</p></div>
 					<ul class="comment-main">
 					<c:forEach items="${commentList}" var="vo">
-					<li>${vo.content}
 					<span id="comment-date">${vo.regDate}</span>
+					<li>${vo.content}
 					<a href="${pageContext.request.contextPath}/blog/delete?no=${vo.no}&url=${url}"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 					</li>
 					</c:forEach>
@@ -62,7 +62,7 @@
 					<c:forEach items="${postList}" var="vo">
 					<c:choose>
 					<c:when test="${categoryClick eq true}">
-					<li><a href="${pageContext.request.contextPath}/blog/${userNo}/${vo.no}/${categoryNo}">${vo.title}</a> <span>${vo.regDate}</span>	</li>
+					<li><a href="${pageContext.request.contextPath}/blog/${userNo}/${vo.no}/${categoryNo}">${vo.title}</a></li>
 					</c:when>
 					<c:otherwise>
 					<li><a href="${pageContext.request.contextPath}/blog/${userNo}/${vo.no}">${vo.title}</a> <span>${vo.regDate}</span>	</li>

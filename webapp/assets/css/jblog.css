@@ -84,7 +84,7 @@ div#content .blog-list		{ margin:20px 0 10px 10px }
 
 /* content title*/
 div .title {
-	text-align: center;
+	text-align: left;
 	padding-left:5px;
 	border-bottom: 1px solid #C4C4C4;
 	background-color: #C4C4C4;
@@ -95,46 +95,56 @@ div .date{
 	padding-right:3px;
 }
 div .content{
-	text-align: center;
+	text-align: left;
+	padding-left:5px;
 }
 div .blog-content-box{
 	background-color: #F9F9F9;
 }
 div .comment-header{
-	text-align: center;
+	text-align: left;
 	border-bottom: 1px solid #C4C4C4;
 	background-color: #C4C4C4;
+	padding-left:5px;
 }
 .comment-main{
 	height: auto;
-	border-bottom: 1px solid #C4C4C4;
+	
 }
  .comment-main li{
  	height:30px;
-	text-align:center;
-	padding-left:300px;
+	text-align:left;
 	padding-bottom:10px;
+	padding-left:5px;
+	border-bottom:1px dotted;
+	margin-left:20px;
+	margin-right:20px;
 }
 .comment-main li img{
  	padding-top:4px;
  	height:20px;
  	margin-right:10px;
+ 	float:right;
 }
- .comment-main li #comment-date{
+#comment-date{
+	margin-left:20px;
  	padding-top:4px;
+ 	padding-left:5px;
  	height:20px;
  	margin-right:10px;
- 	padding-left:200px;
+ 	color:#A0A0A0;
 }
  
  .comment-input #comment-text{
 	border-top:1px solid #C4C4C4;
 	margin-top:10px;
-	margin-left:68%;
+	margin-left:10px;
+	height:60px;
+	width:600px;
 }
 div .comment-input #comment-input-button{
 	margin-top:8px;
-	float:right;
+	height:60px;
 }
 
 /* admin content */
