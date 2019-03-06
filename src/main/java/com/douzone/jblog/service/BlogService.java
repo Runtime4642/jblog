@@ -41,15 +41,15 @@ public class BlogService {
 		return categoryDao.getList(userNo);
 	}
 	
-	public List<PostVo> getList() {
-		return postDao.select();
+	public List<PostVo> getPostList(int userNo) {
+		return postDao.selectByUserNo(userNo);
 	}
 	public List<PostVo> getPostList(Integer categoryNo) {
 		return postDao.selectByCategoryNo(categoryNo);
 	}
 	
-	public PostVo getPostByNo(int no) {
-		return postDao.select(no);
+	public PostVo getPostByNoAndUserNo(int no,int userNo) {
+		return postDao.selectByNoAndUserNo(no,userNo);
 	}
 
 }

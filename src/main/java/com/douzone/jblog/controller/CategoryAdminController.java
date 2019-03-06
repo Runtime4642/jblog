@@ -33,11 +33,12 @@ public class CategoryAdminController {
 	@ResponseBody
 	@RequestMapping(value="/category",method=RequestMethod.POST)
 	public JSONResult writeCategory(@AuthUser UserVo authuser,@ModelAttribute CategoryVo categoryVo) {
-		//이미 동일한 이름의 카테고리가 존재한다면
-		if(categorySerivce.getCategoryByName(categoryVo.getName()) != null)
-			return null;
-		
 		categoryVo.setUserNo(authuser.getNo());
+		//이미 동일한 이름의 카테고리가 존재한다면
+		if(categorySerivce.getCategoryNo(categoryVo) != null)
+		{
+			return null;
+		}
 		if(categorySerivce.write(categoryVo))
 			return JSONResult.success(categoryVo);
 		return null;

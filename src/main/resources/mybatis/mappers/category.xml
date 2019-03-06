@@ -37,9 +37,9 @@ group by a.no
 		]]>
 	</select>
 	
-	<select id="getCategoryNoByName" parameterType="String" resultType="int">
+	<select id="getCategoryNo" parameterType="categoryvo" resultType="int">
 	<![CDATA[
-		select no from category where name=#{name}
+		select no from category where name=#{name} and user_no = #{userNo}
 		]]>
 	</select>
 </mapper>

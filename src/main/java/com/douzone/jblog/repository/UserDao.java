@@ -24,4 +24,8 @@ public class UserDao {
 	public int lastInsertId() {
 		return sqlSession.selectOne("user.lastInsertId");
 	}
+	public UserVo selectById(String id)
+	{
+		return sqlSession.selectOne("user.selectById",id);
+	}
 }

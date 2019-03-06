@@ -23,8 +23,8 @@ public class PostService {
 		return categoryDao.getList(userNo);
 	}
 	
-	public boolean postWrite(String name,PostVo postVo) {
-		postVo.setCategoryNo(categoryDao.getCategoryNoByName(name));
+	public boolean postWrite(CategoryVo categoryVo,PostVo postVo) {
+		postVo.setCategoryNo(categoryDao.getCategoryNo(categoryVo));
 		return postDao.insert(postVo);
 	}
 	

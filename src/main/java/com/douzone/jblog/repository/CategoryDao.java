@@ -36,7 +36,7 @@ public class CategoryDao {
 		return 1==sqlSession.delete("category.deleteByNo",no);
 	}
 	
-	public Integer getCategoryNoByName(String name) {
-		return sqlSession.selectOne("category.getCategoryNoByName",name);
+	public Integer getCategoryNo(CategoryVo categoryVo) {
+		return sqlSession.selectOne("category.getCategoryNo",categoryVo);
 	}
 }

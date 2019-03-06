@@ -27,18 +27,19 @@ public class BlogController {
 		//postNo와 category 입력이 없다면 최근작성한 리스트 출력
 		if(!postNo.isPresent()&&!categoryNo.isPresent())
 		{
-			postList=blogService.getList();
+			postList=blogService.getPostList(userNo);
+			if(postList.size() != 0)
 			model.addAttribute("postVo",postList.get(0));
 		}
 		//게시글 목록을 누른경우
 		else if(postNo.isPresent()&&!categoryNo.isPresent()){
-			postList=blogService.getList();
-			model.addAttribute("postVo",blogService.getPostByNo(postNo.get()));
+			postList=blogService.getPostList(userNo);
+			model.addAttribute("postVo",blogService.getPostByNoAndUserNo(postNo.get(),userNo));
 		}
 		//카테고리를 누른경우
 		else if(postNo.isPresent()&&categoryNo.isPresent()){
 					postList=blogService.getPostList(categoryNo.get());
-					model.addAttribute("postVo",blogService.getPostByNo(postNo.get()));
+					model.addAttribute("postVo",blogService.getPostByNoAndUserNo(postNo.get(),userNo));
 					model.addAttribute("categoryClick",true);
 					model.addAttribute("categoryNo",categoryNo.get());
 		}

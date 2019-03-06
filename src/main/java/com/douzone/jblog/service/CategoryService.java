@@ -28,8 +28,8 @@ public class CategoryService {
 		return categoryDao.delete(no);
 	}
 	
-	public Integer getCategoryByName(String name) {
-		return categoryDao.getCategoryNoByName(name);
+	public Integer getCategoryNo(CategoryVo categoryVo) {
+		return categoryDao.getCategoryNo(categoryVo);
 	}
 	
 	

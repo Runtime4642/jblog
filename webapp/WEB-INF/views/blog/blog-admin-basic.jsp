@@ -17,7 +17,7 @@
 				<c:import url="/WEB-INF/views/includes/admin-menu.jsp" >
 					<c:param name="menu" value="basic"/>
 				</c:import>
-				<form action="${pageContext.request.contextPath}/blog/blog-modify" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/blogAdmin/blog-modify" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>

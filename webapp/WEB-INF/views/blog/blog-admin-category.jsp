@@ -13,13 +13,12 @@
 
 <script type="text/javascript">
 var cnt=1;
-
 var onload = {
 		init: function(){
 			$('.admin-category-add').submit(this.onFormSubmit.bind(this));
 			this.getCategoryList();
-			//$('#deleteImg').click(this.onDeleteImgClick.bind(this)); <--왜안먹는지..?
-			//$(document).on("click", "#deleteImg", this.onDeleteImgClick.bind(this));
+			//$('#deleteImg').click(this.onDeleteImgClick.bind(this)); //<--왜안먹는지..?
+			$(document).on("click", "#deleteImg", this.onDeleteImgClick.bind(this));
 		},
 		onFormSubmit: function(){
 			$.ajax({
@@ -38,19 +37,22 @@ var onload = {
 		},
 		onDeleteImgClick:function(event){
 			event.preventDefault();
+			console.log(event.currentTarget);
+			console.log($(event.currentTarget).data("no"));
 			$.ajax({
 				url:"${pageContext.request.contextPath }/categoryAdmin/delete",
 				type:"post",
 				dataType:"json",
-				data:"no="+$(event).data("no"),
+				data:"no="+$(event.currentTarget).data("no"),
 				success:function(response){
-					
+					if(response.data != null)
+						$('.admin-cat tr[data-no='+response.data+']').remove();
 				},
 				error: function( jqXHR, status, error ){
 					console.error( status + " : " + error );
 				}
 				
-			});
+			});	
 		},
 		getCategoryList:function(){
 			$.ajax({
@@ -86,26 +88,8 @@ var onload = {
 			
 		}
 };
-
 $(function(){
 	onload.init();
-	$(document).on("click", "#deleteImg", function(event){
-		event.preventDefault();
-		$.ajax({
-			url:"${pageContext.request.contextPath }/categoryAdmin/delete",
-			type:"post",
-			dataType:"json",
-			data:"no="+$(this).data("no"),
-			success:function(response){
-				if(response.data != null)
-					$('.admin-cat tr[data-no='+response.data+']').remove();
-			},
-			error: function( jqXHR, status, error ){
-				console.error( status + " : " + error );
-			}
-			
-		});	
-	});
 });	
 	
 </script>

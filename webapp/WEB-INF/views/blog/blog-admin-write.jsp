@@ -30,7 +30,8 @@
 			      			<td class="t">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="title">
-				      			<select name="category">
+			      				<!-- 여기 select는 categoryVo로 들어가져야 하기때문에 name을 name으로 주었다 -->
+				      			<select name="name">
 				      				<c:forEach items="${list}" var="vo">
 				      				<option>${vo.getName()}</option>
 				      				</c:forEach>

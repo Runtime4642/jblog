@@ -10,7 +10,7 @@
 	
 	<select id="lastInsertId" resultType="int">
 		<![CDATA[
-		select last_insert_id() from user
+		select last_insert_id()
 		]]>
 	</select>	
 	<select id="getByIdAndPassword" parameterType="uservo" resultType="uservo">
@@ -20,7 +20,11 @@
 	</select>
 	
 	
-	  
+	  <select id="selectById" resultType="userVo" parameterType="String">
+		<![CDATA[
+		select no,id,name,password,join_date as joinDate from user where id=#{id}
+		]]>
+	</select>	
 	
 	
 </mapper>

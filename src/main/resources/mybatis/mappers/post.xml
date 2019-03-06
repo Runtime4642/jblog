@@ -9,9 +9,9 @@
 	</insert>
 
 	
-	<select id="select" resultType="postvo">
+	<select id="select" resultType="postvo" parameterType="int">
 	<![CDATA[
-			 select no,title,content,reg_date as regDate,category_no as categoryNo from post order by reg_date desc
+			select p.no,p.title,p.content,p.reg_date as regDate,category_no as categoryNo from post p,category c,user u where u.no = c.USER_NO and p.CATEGORY_NO = c.no and u.no=#{userNo} order by p.reg_date desc
 		]]>
 	</select>
 		<select id="selectBycategoryNo" parameterType="Integer" resultType="postvo">
@@ -20,9 +20,10 @@
 		]]>
 	</select>
 	
-	<select id="selectByNo" parameterType="int" resultType="postvo">
+	<select id="selectByNoAndUserNo" parameterType="map" resultType="postvo">
 	<![CDATA[
-			 select no,title,content,reg_date as regDate,category_no as categoryNo from post where no=#{no}
+			 select p.no,p.title,p.content,p.reg_date as regDate,category_no as categoryNo from post p,category c,user u where u.no = c.USER_NO and p.CATEGORY_NO = c.no and u.no=#{userNo} and p.no=#{no} order by p.reg_date desc
+	
 		]]>
 	</select>
 	

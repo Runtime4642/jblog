@@ -36,5 +36,11 @@ public class UserService {
 	public UserVo login(UserVo userVo) {
 		return	userDao.getByIdAndPassword(userVo);
 	}
+	public boolean userSearch(String id) {
+		if(userDao.selectById(id)==null)
+			return false;
+		else
+			return true;
+	}
 
 }
