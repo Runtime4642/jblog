@@ -11,19 +11,54 @@
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
+	<!-- 현재 보고 있는 창을 반환해주기위한 url 값 세팅 -->
+	<c:choose>
+		<c:when test="${categoryClick eq true}">
+			<c:set var="url" value="/blog/${userNo}/${postVo.no}/${categoryNo}"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="url" value="/blog/${userNo}/${postVo.no}"/>
+		</c:otherwise>
+	</c:choose>
+
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/blog-header.jsp" />
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
+					<form class="blog-content-box" method="post" action ="${pageContext.request.contextPath}/blog/writeComment">
+					<div class="title">
 					<h4>${postVo.title}</h4>
-					<p style="text-align: right">${postVo.regDate}</p>
+					</div>
+					<div class="date">
+					<p>${postVo.regDate}</p>
+					</div>
+					<div class="content">
 					<p>
 					${fn:replace(postVo.content, newline, "<br>")}
 					<p>
+					</div>
+					<div class="comment-header"><p>댓글창</p></div>
+					<ul class="comment-main">
+					<c:forEach items="${commentList}" var="vo">
+					<li>${vo.content}
+					<span id="comment-date">${vo.regDate}</span>
+					<a href="${pageContext.request.contextPath}/blog/delete?no=${vo.no}&url=${url}"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+					</li>
+					</c:forEach>
+					</ul>
+					<div class="comment-input">
+					<input type="text" name="content" id="comment-text"/>
+					<input type="submit" value="댓글입력" id="comment-input-button"/>
+					<input type="hidden" value="${postVo.no}" name="postNo"/>
+					<input type="hidden" value="${url}" name="url"/>
+					</div>
+					
+					
+					</form>
 				</div>
 				<ul class="blog-list">
-					
+					<h2>리스트</h2>
 					<c:forEach items="${postList}" var="vo">
 					<c:choose>
 					<c:when test="${categoryClick eq true}">

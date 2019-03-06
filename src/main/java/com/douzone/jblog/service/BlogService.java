@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogDao;
 import com.douzone.jblog.repository.CategoryDao;
+import com.douzone.jblog.repository.CommentDao;
 import com.douzone.jblog.repository.PostDao;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.jblog.vo.CommentVo;
 import com.douzone.jblog.vo.PostVo;
 import com.douzone.jblog.vo.UserVo;
 
@@ -23,6 +25,9 @@ public class BlogService {
 	
 	@Autowired
 	private PostDao postDao;
+	
+	@Autowired
+	private CommentDao commentDao;
 	
 
 	
@@ -50,6 +55,21 @@ public class BlogService {
 	
 	public PostVo getPostByNoAndUserNo(int no,int userNo) {
 		return postDao.selectByNoAndUserNo(no,userNo);
+	}
+	
+	public boolean writeComment(CommentVo commentVo)
+	{
+		return commentDao.insert(commentVo);
+	}
+	
+	public List<CommentVo> getCommentList(int postNo)
+	{
+		return commentDao.getList(postNo);
+	}
+	
+	public boolean deleteComment(int no)
+	{
+		return commentDao.delete(no);
 	}
 
 }

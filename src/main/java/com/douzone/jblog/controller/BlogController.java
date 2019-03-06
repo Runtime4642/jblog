@@ -6,10 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.vo.CommentVo;
 import com.douzone.jblog.vo.PostVo;
 
 
@@ -24,26 +28,32 @@ public class BlogController {
 	@RequestMapping({"/{userNo}","/{userNo}/{postNo}","/{userNo}/{postNo}/{categoryNo}"})
 	public String main(Model model,@PathVariable int userNo,@PathVariable Optional<Integer> postNo,@PathVariable Optional<Integer> categoryNo) {
 		List<PostVo> postList = null;
+		PostVo postVo = null;
 		//postNo와 category 입력이 없다면 최근작성한 리스트 출력
 		if(!postNo.isPresent()&&!categoryNo.isPresent())
 		{
 			postList=blogService.getPostList(userNo);
-			if(postList.size() != 0)
-			model.addAttribute("postVo",postList.get(0));
+			if(postList.size() != 0) {
+				postVo =postList.get(0);
+			model.addAttribute("commentList",blogService.getCommentList(postVo.getNo()));
+			}
 		}
 		//게시글 목록을 누른경우
 		else if(postNo.isPresent()&&!categoryNo.isPresent()){
 			postList=blogService.getPostList(userNo);
-			model.addAttribute("postVo",blogService.getPostByNoAndUserNo(postNo.get(),userNo));
+			postVo =blogService.getPostByNoAndUserNo(postNo.get(),userNo);
+			model.addAttribute("commentList",blogService.getCommentList(postVo.getNo()));
 		}
 		//카테고리를 누른경우
 		else if(postNo.isPresent()&&categoryNo.isPresent()){
 					postList=blogService.getPostList(categoryNo.get());
-					model.addAttribute("postVo",blogService.getPostByNoAndUserNo(postNo.get(),userNo));
+					postVo =blogService.getPostByNoAndUserNo(postNo.get(),userNo);
+					model.addAttribute("commentList",blogService.getCommentList(postVo.getNo()));
 					model.addAttribute("categoryClick",true);
 					model.addAttribute("categoryNo",categoryNo.get());
 		}
 		
+		model.addAttribute("postVo",postVo);
 		model.addAttribute("postList",postList);
 		model.addAttribute("blogVo",blogService.getBlog(userNo));
 		model.addAttribute("categoryList",blogService.getList(userNo));
@@ -51,6 +61,20 @@ public class BlogController {
 		
 		return "blog/blog-main";
 	}
+	
+	@RequestMapping(value="/writeComment",method=RequestMethod.POST)
+	public String writeComment(@ModelAttribute CommentVo commentVo,@RequestParam(value="url")String url) {
+		blogService.writeComment(commentVo);
+		return "redirect:"+url;
+	}
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public String delete(@RequestParam(value="no")int no,@RequestParam(value="url")String url) {
+		
+		blogService.deleteComment(no);
+		return "redirect:"+url;
+	}
+	
+	
 	
 	//option title,content,regDate... url로 받을때 예시로 주석으로 남겨둠
 //	@RequestMapping({"/{userNo}","/{userNo}/{title}/{content}/{regDate}","/{userNo}/{title}/{content}/{regDate}/{category}"})

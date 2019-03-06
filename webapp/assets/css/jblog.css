@@ -20,6 +20,11 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 .center-content .menu li:first-child			{ margin!-left:70px }
 .center-content .menu li a						{ font-size:1.2em }
 
+.blog-list h2 {
+	margin-top: -20px;
+}
+
+
 .center-content form,
 .center-content .welcome-message					{ clear:both; margin:15px auto 25px auto; }
 .center-content .search-form 						{ width:100%; }
@@ -47,7 +52,7 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 
 
 div#container				{ width:920px; margin:0 auto }
-div#header					{ height:120px; background: #5394CC;  }
+div#header					{ height:120px; background: #C4C4C4;  }
 div#content					{ float:left; width:720px; min-height:220px }
 div#content.full-screen		{ float:none; width:920px;}
 div#navigation				{ float:right; width:200px }
@@ -67,16 +72,70 @@ div#header li a 	{ color:#fff; font-weight:bold; text-decoration:none; }
 
 div#container		{ text-align:left }
 
-
 /* content */
 div#content	.blog-content	{ padding:10px }
-.blog-content h4			{ font-size:1.3em; color:#9D96D0 }
+.blog-content h4			{ font-size:1.3em}
 .blog-content p				{ margin-top:10px; line-height:150% }
 div#content .blog-list		{ margin:20px 0 10px 10px }
 .blog-list 					{ width:100% }
 .blog-list li				{ height:20px; clear:both; }
 .blog-list li a				{ display:block; float:left }
 .blog-list li span			{ display:block; float:right; margin-right:30px }
+
+/* content title*/
+div .title {
+	text-align: center;
+	padding-left:5px;
+	border-bottom: 1px solid #C4C4C4;
+	background-color: #C4C4C4;
+}
+/* content date*/
+div .date{
+	text-align: right;
+	padding-right:3px;
+}
+div .content{
+	text-align: center;
+}
+div .blog-content-box{
+	background-color: #F9F9F9;
+}
+div .comment-header{
+	text-align: center;
+	border-bottom: 1px solid #C4C4C4;
+	background-color: #C4C4C4;
+}
+.comment-main{
+	height: auto;
+	border-bottom: 1px solid #C4C4C4;
+}
+ .comment-main li{
+ 	height:30px;
+	text-align:center;
+	padding-left:300px;
+	padding-bottom:10px;
+}
+.comment-main li img{
+ 	padding-top:4px;
+ 	height:20px;
+ 	margin-right:10px;
+}
+ .comment-main li #comment-date{
+ 	padding-top:4px;
+ 	height:20px;
+ 	margin-right:10px;
+ 	padding-left:200px;
+}
+ 
+ .comment-input #comment-text{
+	border-top:1px solid #C4C4C4;
+	margin-top:10px;
+	margin-left:68%;
+}
+div .comment-input #comment-input-button{
+	margin-top:8px;
+	float:right;
+}
 
 /* admin content */
 div#content .admin-menu					{ height:20px; margin-top:15px; margin-bottom:10px }
@@ -122,6 +181,7 @@ div#extra .blog-logo img	{ width:150px }
 /* footer */
 div#footer		{ background:#F0F0F0; color:#666 }
 div#footer p	{ text-align:center; margin:0; padding:8px 10px }
+
 
 
 
